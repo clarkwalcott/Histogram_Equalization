@@ -3,7 +3,7 @@ import numpy as np
 import os, copy
 
 # Reads image into an array
-img = imread('DIP/einstein.tif', 0)
+img = imread('washedout2.tif', IMREAD_GRAYSCALE)
 
 # Get Dimensions of image (row, col)
 dim = img.shape    
@@ -35,13 +35,13 @@ for i in range(dim[0]):
 # Stacks the input and output images together
 result = np.hstack((img, equ))
 
-# Writes the stacked images to a file
-imwrite('histequ_result.png', equ)
+# Writes the image to a file
+imwrite('histequ_result.png', result)
 
 # Displays the result
-imshow('Side By Side', result)
-waitKey(0)
-destroyAllWindows()
+#imshow('Side By Side', result)
+#waitKey(0)
+#destroyAllWindows()
 imshow('By Itself', equ)
 waitKey(0)
 destroyAllWindows()
