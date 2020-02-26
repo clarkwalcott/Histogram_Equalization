@@ -9,7 +9,7 @@ import os, copy
 def hist_eq(img):
     print("Starting Histogram Equalizaton...")
     # MAX Intensity Level
-    L = 15
+    L = 256
 
     # Get Dimensions of image (row, col)
     dim = img.shape    
@@ -27,14 +27,14 @@ def hist_eq(img):
     # Builds Cumulative Histogram
     for i in range(1, L-1):
         cumulative[i] = cumulative[i-1] + hist[i]
-    print(cumulative)
+    # print(cumulative)
     # Normalize Cumulative Histogram
     c = ((L-1)/(dim[0]*dim[1]))       # (L-1)/(M*N)
-    print(c)
+    # print(c)
     for i in range(L-1):
         cumulative[i] = round(c * cumulative[i])
 
-    print(cumulative)
+    # print(cumulative)
     # Transforms Image By Assigning New Grey Value
     for i in range(dim[0]):
         for j in range(dim[1]):
@@ -43,21 +43,19 @@ def hist_eq(img):
 
 def main():
     # Reads image into an array
-    # img = imread('test_images/washedout.tif', IMREAD_GRAYSCALE)
-    img = np.array([[1,8,6,6],[6,3,11,8],[8,8,9,10],[9,10,10,7]], np.int32)
+    img = imread('test_images/washedout.tif', IMREAD_GRAYSCALE)
+    #img = np.array([[1,8,6,6],[6,3,11,8],[8,8,9,10],[9,10,10,7]], np.int32)
     result = hist_eq(img)
-    print(result)
     # Stacks the input and output images together
-    #result = np.hstack((img, equ))
+    result = np.hstack((img, result))
 
     # Writes the image to a file
-    #imwrite('histequ_result.png', result)
-    # imwrite('histequ_result.png', result)
+    imwrite('histequ_result.png', result)
 
     # Displays the result
-    # imshow('Side By Side', result)
-    # waitKey(0)
-    # destroyAllWindows()
+    imshow('Side By Side', result)
+    waitKey(0)
+    destroyAllWindows()
     #imshow('By Itself', equ)
     #waitKey(0)
     #destroyAllWindows()
